@@ -59,8 +59,11 @@ const actualizarUsuario = async(req, res = response) => {
 
 const eliminarUsuario = async(req, res = response) => {
     const {id} = req.params;
+
     const usuario = await Usuario.findByIdAndUpdate(id, {status: false},{new: true});
-    res.json({usuario});
+    const usuarioAutenticado = req.usuario;
+
+    res.json({usuario, usuarioAutenticado});
 }
 
 module.exports = {
